@@ -1,0 +1,27 @@
+{
+  "admin/system/admin/opensshkeys": {
+    "title": "OpenSSH Authorized Keys",
+    "order": 3,
+    "action": {
+      "type": "view",
+      "path": "system/opensshkeys"
+    },
+    "depends": {
+      "acl": [ "luci-app-openssh" ],
+      "fs": { "/usr/sbin/sshd": "executable" }
+    }
+  },
+
+  "admin/system/admin/opensshauth": {
+    "title": "OpenSSH Auth",
+    "order": 4,
+    "action": {
+      "type": "view",
+      "path": "system/opensshauth"
+    },
+    "depends": {
+      "acl": [ "luci-app-openssh" ],
+      "fs": { "/usr/sbin/sshd": "executable" }
+    }
+  }
+}

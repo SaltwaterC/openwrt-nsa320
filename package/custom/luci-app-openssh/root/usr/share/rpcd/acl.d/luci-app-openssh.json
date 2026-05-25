@@ -1,0 +1,25 @@
+{
+  "luci-app-openssh": {
+    "description": "Grant access to OpenSSH authorized keys and authentication policy",
+    "read": {
+      "file": {
+        "/root/.ssh/authorized_keys": [ "read" ],
+        "/etc/ssh/sshd_config.d/50-luci-app-openssh.conf": [ "read" ]
+      },
+      "ubus": {
+        "file": [ "read" ]
+      }
+    },
+    "write": {
+      "file": {
+        "/root/.ssh/authorized_keys": [ "write" ],
+        "/etc/ssh/sshd_config.d/50-luci-app-openssh.conf": [ "write" ],
+        "/etc/init.d/sshd restart": [ "exec" ],
+        "/usr/libexec/luci-openssh-fix-permissions": [ "exec" ]
+      },
+      "ubus": {
+        "file": [ "exec", "write" ]
+      }
+    }
+  }
+}

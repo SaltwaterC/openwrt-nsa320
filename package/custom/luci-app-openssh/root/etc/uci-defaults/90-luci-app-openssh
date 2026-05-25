@@ -1,0 +1,3 @@
+#!/bin/sh
+/usr/libexec/luci-openssh-fix-permissions
+exit 0
