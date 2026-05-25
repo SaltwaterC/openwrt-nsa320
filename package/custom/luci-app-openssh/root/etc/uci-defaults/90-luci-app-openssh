@@ -1,3 +1,26 @@
 #!/bin/sh
+
+conf=/etc/ssh/sshd_config.d/50-luci-app-openssh.conf
+permit_root=prohibit-password
+password_auth=yes
+
+if [ -r "$conf" ]; then
+	permit_root=$(sed -n "s/^[[:space:]]*PermitRootLogin[[:space:]][[:space:]]*//p" "$conf" | tail -n 1)
+	password_auth=$(sed -n "s/^[[:space:]]*PasswordAuthentication[[:space:]][[:space:]]*//p" "$conf" | tail -n 1)
+fi
+
+[ -n "$permit_root" ] || permit_root=prohibit-password
+[ -n "$password_auth" ] || password_auth=yes
+
+mkdir -p /etc/ssh/sshd_config.d
+cat > "$conf" <<EOF
+# Managed by luci-app-openssh
+PermitRootLogin $permit_root
+PasswordAuthentication $password_auth
+KbdInteractiveAuthentication no
+AuthorizedKeysFile .ssh/authorized_keys
+EOF
+chmod 600 "$conf"
+
 /usr/libexec/luci-openssh-fix-permissions
 exit 0

@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_VERSION:=1
-PKG_RELEASE:=1
+PKG_RELEASE:=3
 
 LUCI_TITLE:=LuCI OpenSSH management
 LUCI_DEPENDS:=+luci-base +openssh-server

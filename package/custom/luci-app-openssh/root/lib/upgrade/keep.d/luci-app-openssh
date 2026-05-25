@@ -1,0 +1,3 @@
+# Files managed by luci-app-openssh
+/root/.ssh/authorized_keys
+/etc/ssh/sshd_config.d/50-luci-app-openssh.conf
